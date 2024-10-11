@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKETOTO VOZI VESPA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: red;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        h1 {
+            font-size: 4.5em; /* 50% bigger than before */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .insta-button {
+            padding: 12px 25px;
+            background-color: white;
+            color: red;
+            border: none;
+            font-size: 1.4em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Adds space between the text and the button */
+        }
+
+        .insta-button:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Stylish time display at the top right */
+        .time {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3em; /* 50% bigger */
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="time" id="time"></div>
+
+    <h1>CKETOTO VOZI VESPA</h1>
+
+    <a href="https://www.instagram.com/anasttasoskii/" target="_blank">
+        <button class="insta-button">Insta</button>
+    </a>
+
+    <script>
+        // Display the local time (hours and minutes) and update every minute
+        function updateTime() {
+            const timeElement = document.getElementById('time');
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            timeElement.textContent = `${hours}:${minutes}`;
+        }
+
+        // Update time every minute
+        setInterval(updateTime, 60000);
+        updateTime(); // Initial call to set time immediately
+    </script>
+
+</body>
+</html>
