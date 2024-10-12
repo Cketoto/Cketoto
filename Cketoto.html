@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CKETOTO VOZI VESPA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!-- Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Poppins:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* Refined gradient background */
         body {
-            background-color: red;
+            background: linear-gradient(135deg, #43cea2, #185a9d); /* Teal to Indigo */
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -17,69 +21,131 @@
             align-items: center;
             height: 100vh;
             color: white;
-        }
-
-        h1 {
-            font-size: 4.5em; /* Desktop size */
-            font-weight: bold;
-            margin-bottom: 20px;
             text-align: center;
         }
 
-        a {
-            text-decoration: none;
+        /* Gradient animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
+        /* New font with more character */
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 3px 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animated glowing button */
         .insta-button {
-            padding: 12px 25px;
-            background-color: white;
-            color: red;
-            border: none;
-            font-size: 1.4em;
+            padding: 15px 50px;
+            background: linear-gradient(45deg, #ff6b6b, #f06595);
+            color: white;
+            font-size: 1.5em;
             font-weight: bold;
-            border-radius: 5px;
+            border: none;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px; /* Adds space between the text and the button */
+            box-shadow: 0 8px 20px rgba(240, 101, 149, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect for button */
+        .insta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            z-index: 0;
         }
 
         .insta-button:hover {
-            background-color: #f1f1f1;
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(240, 101, 149, 1);
         }
 
-        /* Stylish time display at the top right */
+        .insta-button:hover::before {
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+        }
+
+        .insta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassy time display */
         .time {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 20px;
-            font-size: 3em; /* Desktop size */
-            font-weight: bold;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
-            padding: 15px 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 2.5em;
+            font-weight: 400;
+            color: #f8f8f8;
+            padding: 10px 25px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);  /* Glass effect */
         }
 
-        /* Mobile-friendly adjustments */
+        /* More stylish Instagram preview */
+        .insta-preview {
+            margin-top: 30px;
+            width: 350px;
+            height: 450px;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .insta-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsive adjustments for mobile */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5em; /* Smaller text on mobile */
+                font-size: 3em;
             }
 
             .time {
-                font-size: 2em; /* Adjust the clock size */
-                padding: 10px 20px;
+                font-size: 2em;
             }
 
             .insta-button {
-                font-size: 1.2em;
-                padding: 10px 20px;
+                font-size: 1.3em;
+                padding: 10px 40px;
+            }
+
+            .insta-preview {
+                width: 300px;
+                height: 400px;
             }
         }
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2em; /* Even smaller for very small screens */
+                font-size: 2.5em;
             }
 
             .time {
@@ -87,22 +153,34 @@
             }
 
             .insta-button {
-                font-size: 1.1em;
-                padding: 8px 16px;
+                font-size: 1.2em;
+                padding: 10px 30px;
+            }
+
+            .insta-preview {
+                width: 280px;
+                height: 380px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Clock Display -->
     <div class="time" id="time"></div>
 
+    <!-- Main Heading -->
     <h1>CKETOTO VOZI VESPA</h1>
 
+    <!-- Insta Button -->
     <a href="https://www.instagram.com/anasttasoskii/" target="_blank">
-        <button class="insta-button">Insta</button>
+        <button class="insta-button"><span>Insta</span></button>
     </a>
 
+    <!-- Instagram Preview -->
+    <iframe class="insta-preview" src="https://www.instagram.com/anasttasoskii/embed" frameborder="0" scrolling="no"></iframe>
+
+    <!-- JavaScript for Local Time -->
     <script>
         // Display the local time (hours and minutes) and update every minute
         function updateTime() {
