@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom URL QR Code Generator</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            color: #333;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-container {
+            position: relative;
+            width: 350px;
+        }
+
+        .input-container input[type="text"] {
+            padding: 12px 40px 12px 20px;
+            width: 100%;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .input-container input[type="text"]:focus {
+            border-color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .input-container i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background-color: #6a11cb;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2575fc;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        #qrCode {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        #qrCode canvas {
+            transition: all 0.3s ease;
+        }
+
+        #qrCode:hover canvas {
+            transform: scale(1.05);
+        }
+
+        /* Download Button */
+        #downloadBtn {
+            display: none;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        #downloadBtn:hover {
+            background-color: #218838;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Генерирање на QR код за вашата URL адреса</h1>
+
+    <!-- Input field with icon -->
+    <div class="input-container">
+        <input type="text" id="urlInput" placeholder="Внесете URL (п.р. https://Пример.com)" />
+        <i class="fas fa-link"></i>
+    </div>
+
+    <!-- Generate QR Code button -->
+    <button onclick="generateQRCode()">Генерирање на QR код</button>
+
+    <!-- Container to display the QR Code -->
+    <div id="qrCode"></div>
+
+    <!-- Download QR Code Button -->
+    <button id="downloadBtn" onclick="downloadQRCode()">Преземање на QR код</button>
+
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        function generateQRCode() {
+            const url = document.getElementById("urlInput").value;
+
+            if (!url) {
+                alert("Ве молиме внесете URL.");
+                return;
+            }
+
+            // Clear previous QR code
+            document.getElementById("qrCode").innerHTML = "";
+
+            // Create a new QR code
+            const qrCode = new QRCode(document.getElementById("qrCode"), {
+                text: url,
+                width: 200,
+                height: 200,
+                correctLevel: QRCode.CorrectLevel.H // Error correction level
+            });
+
+            // Display the download button after QR code generation
+            document.getElementById("downloadBtn").style.display = "inline-block";
+        }
+
+        function downloadQRCode() {
+            // Get the QR code canvas element
+            const qrCanvas = document.querySelector("#qrCode canvas");
+
+            // Create an anchor element for downloading the image
+            const downloadLink = document.createElement("a");
+            downloadLink.href = qrCanvas.toDataURL("image/png");
+            downloadLink.download = "QRCode.png";
+
+            // Trigger the download
+            downloadLink.click();
+        }
+    </script>
+</body>
+</html>
