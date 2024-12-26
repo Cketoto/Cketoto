@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Motorcycle Range Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/motorcycle.svg">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .container h1 {
+            color: #00796b;
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container h1 i {
+            margin-right: 10px;
+        }
+        input, button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            border-color: #00796b;
+        }
+        button {
+            background-color: #00796b;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-motorcycle"></i> Range Calculator</h1>
+        <input type="number" id="batteryVoltage" placeholder="Enter battery voltage (V)">
+        <button onclick="calculate()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const voltage = parseFloat(document.getElementById('batteryVoltage').value);
+            let batteryPercent = ((voltage - 48) / (67.2 - 48)) * 100;
+            let range;
+
+            if (batteryPercent < 0) batteryPercent = 0;
+            if (batteryPercent > 100) batteryPercent = 100;
+
+            range = batteryPercent * 40 / 100;
+
+            document.getElementById('result').innerHTML = 
+                `Battery: ${batteryPercent.toFixed(2)}%<br>Range: ${range.toFixed(2)} km`;
+        }
+    </script>
+</body>
+</html>
